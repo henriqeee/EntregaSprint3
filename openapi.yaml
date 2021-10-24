@@ -1,0 +1,152 @@
+openapi: 3.0.1
+info: 
+  title: API de Regiões Brasileiras
+  description: API para informar dados de Regiões Brasileiras, informando o nome da Região, Capital, População, Área e o Nome do Estado.
+  version: 0.0.1
+  termsOfService: https://github.com/henriqeee/EntregaSprint3
+  contact:
+    name: Entrar em contato
+    email: henrique.engers_BOLS@compasso.com.br
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+    
+servers: 
+- url: https://github.com/henriqeee/EntregaSprint3
+  description: API enviada GIT
+    
+  
+paths:
+  /states:
+    post:
+      summary: Adiciona dados em uma  Região
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/states"
+      responses:
+        201:
+          description: "Sucesso"
+                  
+              
+    get:
+      summary: Filtra os estados por região, maior população e de maior área.
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/states"
+                
+  /states/{id}:
+    get:
+      summary: Recupera uma Regiao pelo ID
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses: 
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/states"
+          404:
+            description: Região não encontrada
+            content:
+              application/json:
+                example: "Not Found"
+                
+    put:
+      summary: Cria ou substitui uma Região pelo ID
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses: 
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/states"
+          404:
+            description: Região não encontrada
+            content:
+              application/json:
+                example: "Not Found"
+                
+    delete:
+      summary: Deleta uma Região pelo ID
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses: 
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/states"
+          404:
+            description: Região não encontrada
+            content:
+              application/json:
+                example: "Not Found"
+    
+                
+
+
+security:
+- auth: []
+
+components:
+  schemas:
+    states:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string 
+        regiao:
+          type: string 
+        populacao:
+          type: number
+        capital:
+          type: string 
+        area: 
+          type: number
+        
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
